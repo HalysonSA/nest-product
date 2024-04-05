@@ -25,4 +25,20 @@ export class ProductService {
       data,
     });
   }
+
+  async updateProduct(data: {
+    id: number;
+    name: string;
+    description: string;
+    price: number;
+  }): Promise<Product> {
+    return this.prisma.product.update({
+      where: { id: data.id },
+      data: {
+        name: data.name,
+        description: data.description,
+        price: data.price,
+      },
+    });
+  }
 }

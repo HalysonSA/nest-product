@@ -1,8 +1,7 @@
-import { IsAlpha, IsNotEmpty, Min } from 'class-validator';
+import { IsNotEmpty, Min } from 'class-validator';
 
 export class CreateProductDto {
   @IsNotEmpty()
-  @IsAlpha()
   name: string;
 
   @IsNotEmpty()

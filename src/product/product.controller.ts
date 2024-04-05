@@ -4,6 +4,7 @@ import {
   Get,
   HttpCode,
   Param,
+  Patch,
   Post,
   UsePipes,
   ValidationPipe,
@@ -11,6 +12,7 @@ import {
 import { ProductService } from './product.service';
 import { Product } from '@prisma/client';
 import { CreateProductDto } from './dto/createProduct.dto';
+import { UpdateProductDto } from './dto/updateProduct.dto';
 
 @Controller('product')
 export class ProductController {
@@ -31,5 +33,11 @@ export class ProductController {
   @UsePipes(new ValidationPipe())
   createProduct(@Body() data: CreateProductDto): Promise<Product> {
     return this.productService.createProduct(data);
+  }
+
+  @Patch()
+  @UsePipes(new ValidationPipe())
+  updateProduct(@Body() data: UpdateProductDto): Promise<Product> {
+    return this.productService.updateProduct({ ...data, id: Number(data.id) });
   }
 }
